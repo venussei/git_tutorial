@@ -49,3 +49,12 @@ git log -p index.html
 #ファイルごと削除
 git rm ファイル名
 git rm -r ディレクトリ名（bashのコマンドと同様）
+
+#リポジトリだけからファイル削除、ワークスペースには残っている
+git rm --cached ファイル名
+
+
+
+
+git reset HEAD index.html
+git checkout index.html
