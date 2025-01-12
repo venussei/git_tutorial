@@ -14,7 +14,34 @@
     <p>Thank you for visiting!</p>
 </body>
 </html>
-git add　ステージまでファイルをアップする
-git commit -m ローカルリポジトリまでアップする
+##gitの基本
+1.gitはスナップショットでファイルを保存する
+gitコミットで記録をしている
+
+
+#　ステージまでファイルをアップする
+git add　(ファイル名、ディレクトリ名、相対パスなど)
+
+#ローカルリポジトリまでアップする
+#-m はコメントを付きで、コミット（変更内容を確認しない）
+git commit -m 
+#-v はエディタが立ち上がり、エディタから変更内容を確認し、コメントを追加してコミット
 git commit -v  エディタが立ち上がる
-git status 変更状況を確認する
+
+#変更状況を確認する
+git status 
+
+#作業フォルダとステージの比較
+git diff
+
+#ステージとローカルリポジトリの比較
+git diff --staged
+
+#変更履歴を表示する
+git log
+
+#最後の一行で表示する
+git log --oneline
+
+#特定ファイルの表示
+git log -p index.html
