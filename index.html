@@ -62,6 +62,14 @@ mv <旧ファイル名> <新ファイル名>
 git add <新ファイル名>
 git rm <旧ファイル名>
 
+# エリアスをつける
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.br branch 
+git config --global alias.co checkout
+
+--globalはPC全体の設定を変更することになる
+付けない場合は、いまいるプロジェクトの設定となる。
 
 git reset HEAD index.html
 git checkout index.html
