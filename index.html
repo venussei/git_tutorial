@@ -144,3 +144,82 @@ git fetch リモート名
 
 ローカルリポジトリからワークツリーに情報を反映したい
 git merge
+
+ブランチの情報を表示
+git branch -a 
+-aは全部表示する
+
+git checkout remotes/origin/master 
+
+venus@LAPTOP-QA29LUM1 MINGW64 ~/Desktop/gittest (master)
+$ git checkout remotes/origin/master
+Note: switching to 'remotes/origin/master'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at cb411b1 Create home.html
+
+git pull <リモート名><ブランチ名>
+イコール
+git fetch
+git merge 
+
+
+プルの注意点
+今はmasterにいる
+git pull origin hoge
+↓
+remotes/origin/hoge の↓が更新される
+かつ
+
+マスターブランチにhogeブランチがマージされる
+
+
+
+#リモートの詳細情報を知る
+git remote show <リモート名>
+FetchとPullのURL
+リモートブランチ
+git pull 挙動
+git push 挙動
+
+#リモート名変更、削除
+git remote rename old new
+
+git remote rm remotename
+
+コミットはスナップショットで、時系列で繋がっている
+
+ブランチはコミットを指したポインターである
+headは自分が今作業しているブランチのポインターを指し示している
+
+ブランチを新規追加する
+git branch ブランチ名
+※ブランチを作成するたけで、ブランチの切り替えは行わないよ
+
+ブランチの一覧を表示する
+git branch
+
+すべてのブランチを表示する
+git branch -a
+
+
+git log --oneline --decorate
+
+git checkout 既存ブランチ名
+
+ブランチを新規作成して、切り替える
+git checkout -b 新ブランチ名
