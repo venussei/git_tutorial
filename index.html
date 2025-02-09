@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My First HTML Page</title>
-</head>
-<body>
-    <h1>Welcome to My Web Page</h1>
-    <p>This is a paragraph of text on my web page.</p>
-    <ul>
-        <li>First item</li>
-        <li>Second item</li>
-        <li>Third item</li>
-    </ul>
-    <p>Thank you for visiting!</p>
-</body>
-</html>
 ##gitの基本
 1.gitはスナップショットでファイルを保存する
 gitコミットで記録をしている
 
+# 新規リポジトリの作成
+git init
 
-#　ステージまでファイルをアップする
-git add　(ファイル名、ディレクトリ名、相対パスなど)
+git clone URL
+
+ステージの役割：コミットする変更を準備
+# ステージまでファイルをアップする
+git add <ファイル名、ディレクトリ名、相対パスなど>
 
 #ローカルリポジトリまでアップする
 #-m はコメントを付きで、コミット（変更内容を確認しない）
@@ -72,6 +61,27 @@ git checkout --
 --はブランチ名とファイル名が被ったときにgit1がわからなくなるのを避けるため
 
 
+
+git のリモート名がoriginという名称が多いようです、理由は？
+origin という名前がリモートリポジトリのデフォルト名としてよく使われるのには、歴史的な理由と便利さがあります。
+
+理由
+デフォルトのネーミング:
+
+Gitを使ってリモートリポジトリを初めてクローンする際、クローン元のリポジトリは自動的に origin という名前で設定されます。
+
+これはGitの作成者であるリーナス・トーバルズやGitコミュニティが、リモートのデフォルトの名前を簡潔かつ明示的にするために選んだ名称です。
+
+分かりやすさ:
+
+origin という名前は、リモートリポジトリがどこから来たのか、つまり「オリジン（起源）」を示しているため、直感的です。
+
+互換性と一貫性:
+
+多くのGitツールやGUIは、このデフォルトの命名規則に従っています。そのため、origin を使うことでツール間の一貫性が保たれ、混乱を避けることができます。
+
+もちろん、リモートの名前は git remote rename コマンドを使用して変更することができますが、多くの場合デフォルトの origin のままで使用されます。
+
 #ステージした変更を取り消す
 git reset <HEAD> ファイル名
 git reset <HEAD>　ディレクトリ名
@@ -97,6 +107,18 @@ git config --global alias.co checkout
 
 git reset HEAD index.html
 git checkout index.html
+
+.gitignoreファイルの書き方
+# #から始まる行はコメント
+# 指定したファイルを除外
+index.html
+ # ルートディレクトリを指定
+/root.html
+ # ディレクトリ以下を除外
+dir/
+ # /以外の文字列にマッチ「*」
+/*/*.css
+変更を元に戻すコマン
 
 
 #リモートの情報を確認する
