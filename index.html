@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My First HTML Page</title>
-</head>
-<body>
-    <h1>Welcome to My Web Page</h1>
-    <p>This is a paragraph of text on my web page.</p>
-    <ul>
-        <li>First item</li>
-        <li>Second item</li>
-        <li>Third item</li>
-    </ul>
-    <p>Thank you for visiting!</p>
-</body>
-</html>
 ##gitの基本
 1.gitはスナップショットでファイルを保存する
 gitコミットで記録をしている
 
+# 新規リポジトリの作成
+git init
 
-#　ステージまでファイルをアップする
-git add　(ファイル名、ディレクトリ名、相対パスなど)
+git clone URL
+
+ステージの役割：コミットする変更を準備
+# ステージまでファイルをアップする
+git add <ファイル名、ディレクトリ名、相対パスなど>
 
 #ローカルリポジトリまでアップする
 #-m はコメントを付きで、コミット（変更内容を確認しない）
@@ -72,6 +61,27 @@ git checkout --
 --はブランチ名とファイル名が被ったときにgit1がわからなくなるのを避けるため
 
 
+
+git のリモート名がoriginという名称が多いようです、理由は？
+origin という名前がリモートリポジトリのデフォルト名としてよく使われるのには、歴史的な理由と便利さがあります。
+
+理由
+デフォルトのネーミング:
+
+Gitを使ってリモートリポジトリを初めてクローンする際、クローン元のリポジトリは自動的に origin という名前で設定されます。
+
+これはGitの作成者であるリーナス・トーバルズやGitコミュニティが、リモートのデフォルトの名前を簡潔かつ明示的にするために選んだ名称です。
+
+分かりやすさ:
+
+origin という名前は、リモートリポジトリがどこから来たのか、つまり「オリジン（起源）」を示しているため、直感的です。
+
+互換性と一貫性:
+
+多くのGitツールやGUIは、このデフォルトの命名規則に従っています。そのため、origin を使うことでツール間の一貫性が保たれ、混乱を避けることができます。
+
+もちろん、リモートの名前は git remote rename コマンドを使用して変更することができますが、多くの場合デフォルトの origin のままで使用されます。
+
 #ステージした変更を取り消す
 git reset <HEAD> ファイル名
 git reset <HEAD>　ディレクトリ名
@@ -97,6 +107,18 @@ git config --global alias.co checkout
 
 git reset HEAD index.html
 git checkout index.html
+
+.gitignoreファイルの書き方
+# #から始まる行はコメント
+# 指定したファイルを除外
+index.html
+ # ルートディレクトリを指定
+/root.html
+ # ディレクトリ以下を除外
+dir/
+ # /以外の文字列にマッチ「*」
+/*/*.css
+変更を元に戻すコマン
 
 
 #リモートの情報を確認する
@@ -144,3 +166,86 @@ git fetch リモート名
 
 ローカルリポジトリからワークツリーに情報を反映したい
 git merge
+
+ブランチの情報を表示
+git branch -a 
+-aは全部表示する
+
+git checkout remotes/origin/master 
+
+venus@LAPTOP-QA29LUM1 MINGW64 ~/Desktop/gittest (master)
+$ git checkout remotes/origin/master
+Note: switching to 'remotes/origin/master'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at cb411b1 Create home.html
+
+git pull <リモート名><ブランチ名>
+イコール
+git fetch
+git merge 
+
+
+プルの注意点
+今はmasterにいる
+git pull origin hoge
+↓
+remotes/origin/hoge の↓が更新される
+かつ
+
+マスターブランチにhogeブランチがマージされる
+
+
+
+#リモートの詳細情報を知る
+git remote show <リモート名>
+FetchとPullのURL
+リモートブランチ
+git pull 挙動
+git push 挙動
+
+#リモート名変更、削除
+git remote rename old new
+
+git remote rm remotename
+
+コミットはスナップショットで、時系列で繋がっている
+
+ブランチはコミットを指したポインターである
+headは自分が今作業しているブランチのポインターを指し示している
+
+ブランチを新規追加する
+git branch ブランチ名
+※ブランチを作成するたけで、ブランチの切り替えは行わないよ
+
+ブランチの一覧を表示する
+git branch
+
+すべてのブランチを表示する
+git branch -a
+
+
+git log --oneline --decorate
+
+git checkout 既存ブランチ名
+
+ブランチを新規作成して、切り替える
+git checkout -b 新ブランチ名
+
+コンフリクトを起こす
+
+ リベースの内容を追記予定
