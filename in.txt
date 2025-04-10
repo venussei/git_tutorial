@@ -1,0 +1,60 @@
+from diagrams import Cluster, Diagram, Edge
+from diagrams.azure.network import FrontDoor, DNSZones, LoadBalancers, PrivateEndpoints, ApplicationGateway, BastionHosts
+from diagrams.azure.compute import AKS
+from diagrams.azure.identity import KeyVaults
+from diagrams.azure.devtools import ApplicationInsights
+from diagrams.azure.database import CosmosDb
+from diagrams.azure.storage import StorageAccounts
+from diagrams.azure.general import AzureSubscription
+from diagrams.azure.security import FirewallPolicies
+from diagrams.onprem.client import Users
+from diagrams.onprem.network import Internet
+from diagrams.onprem.compute import Server
+from diagrams.k8s.compute import Pod
+
+with Diagram("Azure Architecture Overview", show=False):
+
+    users = Users("Application Users")
+    admin = Users("Admins/Engineers")
+
+    with Cluster("Azure"):
+        dns = DNSZones("DNS Zone")
+        fd = FrontDoor("Azure Front Door")
+        policy = FirewallPolicies("WAF Policy")
+        bastion = BastionHosts("Azure Bastion")
+        nat_gateway = ApplicationGateway("Azure NAT Gateway")
+        internet = Internet("Internet")
+
+        with Cluster("VNet"):
+            with Cluster("Subnets"):
+                bastion_subnet = Server("Bastion Host")
+                vm_subnet = Server("Jump Box VM")
+
+                with Cluster("AKS Cluster"):
+                    aks = AKS("Azure Kubernetes Service")
+                    api_server = Server("API Server")
+                    ingress = LoadBalancers("Ingress")
+                    with Cluster("Pods"):
+                        app1 = Pod("App Pod 1")
+                        app2 = Pod("App Pod 2")
+
+            with Cluster("Private Endpoints"):
+                endpoint1 = PrivateEndpoints("Blob Storage")
+                endpoint2 = PrivateEndpoints("Key Vault")
+                endpoint3 = PrivateEndpoints("Other Service")
+
+        storage = StorageAccounts("Storage")
+        keyvault = KeyVaults("Key Vault")
+        logs = ApplicationInsights("Monitor Logs")
+
+    # Connections
+    users >> Edge(label="HTTPS") >> fd >> policy >> endpoint1
+    admin >> bastion
+    bastion >> vm_subnet
+    fd >> dns
+    endpoint1 >> storage
+    endpoint2 >> keyvault
+    vm_subnet >> aks
+    aks >> ingress >> [app1, app2]
+    ingress >> nat_gateway >> internet
+    logs << aks
